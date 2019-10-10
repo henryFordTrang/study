@@ -41,20 +41,20 @@
     </mvc:annotation-driven>
 
     <!-- 为了加载拦截器 需要 日志拦截器 （登录拦截和权限拦截已在shiro实现，看实现 情况处理） -->
-    <mvc:interceptors>
-        <!-- 使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求 -->
-        <!--<bean class="com.zhuyun.interceptor.LogInterceptor"/>-->
+    <!-- 使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求 -->
+        <!-- <bean class="com.zhuyun.interceptor.LogInterceptor"/> -->
+    <mvc:interceptors>       
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/statics/**"/>
             <mvc:exclude-mapping path="/**/**.html"/>
             <mvc:exclude-mapping path="/**/**.js"/>
-            <bean class="com.zhuyun.interceptor.LogInterceptor"/>
+            <bean class="com.study.security.logInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 
     <!-- Velocity视图解析器    默认视图  -->
-    <bean id="velocityViewResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+   <bean id="velocityViewResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
         <property name="contentType" value="text/html;charset=UTF-8"/>
         <property name="viewNames" value="*.html"/>
         <property name="suffix" value=""/>
