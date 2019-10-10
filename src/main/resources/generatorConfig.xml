@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<properties resource="platform.properties" />
+	<!--  <classPathEntry location="/Users/zhaoxingfan/Documents/Repository/mysql/mysql-connector-java/5.1.32/mysql-connector-java-5.1.32.jar" />  -->
+	 <classPathEntry location="C:\Users\Administrator\.m2\repository\mysql\mysql-connector-java/5.1.39/mysql-connector-java-5.1.39.jar" /> 
+	<context id="commonframe_schema" targetRuntime="MyBatis3">
+		<!--This plugin is only valid for MyBatis3 target runtime -->
+		<plugin type="org.mybatis.generator.plugins.RowBoundsPlugin" />
+		<plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+		<commentGenerator>
+			<property name="suppressAllComments" value="false" />
+			<property name="suppressDate" value="true" />
+		</commentGenerator>
+		<jdbcConnection driverClass="${jdbc.driverClassName}"
+			connectionURL="${jdbc.url}" userId="${jdbc.username}"
+			password="${jdbc.password}">
+		</jdbcConnection>
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<javaModelGenerator targetPackage="com.study.model"
+			targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		<sqlMapGenerator targetPackage="mapper"
+			targetProject="src/main/resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.study.dao" targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+		
+<!-- 		
+		<table schema="class_card" tableName="mitu_skjhb"
+			domainObjectName="MituSkjhb">
+			<generatedKey column="id" sqlStatement="mysql" identity="true" />
+			<columnOverride column="sknl" jdbcType="VARCHAR" />
+			<columnOverride column="zynr" jdbcType="VARCHAR" />
+			<columnOverride column="zc" javaType="Integer" />
+			<columnOverride column="xqs" javaType="Integer" />
+			<columnOverride column="zyts" javaType="Integer" />
+			<columnOverride column="deltag" javaType="Integer" />
+			<columnOverride column="ks" javaType="Integer" />
+			<columnOverride column="xz" javaType="Integer" />
+			<columnOverride column="skjhzxzt" javaType="Integer" />
+			<columnOverride column="skjhgzlrdzt" javaType="Integer" />
+			<columnOverride column="skjhjsqrzt" javaType="Integer" />
+			<columnOverride column="spzt" javaType="Integer" />
+		</table>
+		-->
+		<table schema="huawei" tableName="user"
+			domainObjectName="User">
+			<generatedKey column="uid" sqlStatement="mysql" identity="true" />
+		</table>
+		
+		<!--<table schema="huawei" tableName="brand"
+			domainObjectName="Brand">
+			<generatedKey column="bid" sqlStatement="mysql" identity="true" />
+		</table>
+		<table schema="huawei" tableName="orders"
+			domainObjectName="Orders">
+			<generatedKey column="oid" sqlStatement="mysql" identity="true" />
+		</table>
+		<table schema="huawei" tableName="orderclass"
+			domainObjectName="Orderclass">
+			<generatedKey column="ocid" sqlStatement="mysql" identity="true" />
+		</table>
+		<table schema="huawei" tableName="authority"
+			domainObjectName="Authority">
+			<generatedKey column="auid" sqlStatement="mysql" identity="true" />
+		</table>
+		
+		<table schema="huawei" tableName="department"
+			domainObjectName="Department">
+			<generatedKey column="did" sqlStatement="mysql" identity="true" />
+		</table>
+		<table schema="huawei" tableName="o_accessories"
+			domainObjectName="Oaccessories">
+			<generatedKey column="acid" sqlStatement="mysql" identity="true" />
+		</table>
+		<table schema="huawei" tableName="o_bcode"
+			domainObjectName="Obcode">
+			<generatedKey column="bcid" sqlStatement="mysql" identity="true" />
+		</table>
+		<table schema="huawei" tableName="o_bottomd"
+			domainObjectName="Obottomd">
+			<generatedKey column="boid" sqlStatement="mysql" identity="true" />
+		</table>
+		<table schema="huawei" tableName="o_chopper"
+			domainObjectName="Ochopper">
+			<generatedKey column="chid" sqlStatement="mysql" identity="true" />
+		</table>
+		<table schema="huawei" tableName="o_bplate"
+			domainObjectName="Obplate">
+			<generatedKey column="bpid" sqlStatement="mysql" identity="true" />
+		</table>
+		<table schema="huawei" tableName="o_bknife"
+			domainObjectName="Obknife">
+			<generatedKey column="bkid" sqlStatement="mysql" identity="true" />
+		</table>
+		<table schema="huawei" tableName="o_csample"
+			domainObjectName="Ocsample">
+			<generatedKey column="csid" sqlStatement="mysql" identity="true" />
+		 </table>
+		<table schema="huawei" tableName="o_examine"
+			domainObjectName="Oexamine">
+			<generatedKey column="exid" sqlStatement="mysql" identity="true" />
+		</table>
+		<table schema="huawei" tableName="o_cutting"
+			domainObjectName="Ocutting">
+			<generatedKey column="cuid" sqlStatement="mysql" identity="true" />
+		</table>
+		<table schema="huawei" tableName="o_fabric"
+			domainObjectName="Ofabric">
+			<generatedKey column="faid" sqlStatement="mysql" identity="true" />
+		</table>
+		<table schema="huawei" tableName="o_fplate"
+			domainObjectName="Ofplate">
+			<generatedKey column="fpid" sqlStatement="mysql" identity="true" />
+		</table>
+		<table schema="huawei" tableName="o_fmold"
+			domainObjectName="Ofmold">
+			<generatedKey column="fmid" sqlStatement="mysql" identity="true" />
+		</table>
+		<table schema="huawei" tableName="o_fset"
+			domainObjectName="Ofset">
+			<generatedKey column="fsid" sqlStatement="mysql" identity="true" />
+		</table>
+		<table schema="huawei" tableName="o_heel"
+			domainObjectName="Oheel">
+			<generatedKey column="heid" sqlStatement="mysql" identity="true" />
+		</table>
+		<table schema="huawei" tableName="o_inbox"
+			domainObjectName="Oinbox">
+			<generatedKey column="inid" sqlStatement="mysql" identity="true" />
+		</table>
+		<table schema="huawei" tableName="o_lable"
+			domainObjectName="Olable">
+			<generatedKey column="laid" sqlStatement="mysql" identity="true" />
+		</table>
+		<table schema="huawei" tableName="o_ncart"
+			domainObjectName="Oncart">
+			<generatedKey column="ncid" sqlStatement="mysql" identity="true" />
+		</table>
+		<table schema="huawei" tableName="o_mknife"
+			domainObjectName="Omknife">
+			<generatedKey column="mkid" sqlStatement="mysql" identity="true" />
+		</table>
+		<table schema="huawei" tableName="o_midsole"
+			domainObjectName="Omidsole">
+			<generatedKey column="miid" sqlStatement="mysql" identity="true" />
+		</table>
+		<table schema="huawei" tableName="o_offer"
+			domainObjectName="Ooffer">
+			<generatedKey column="ofid" sqlStatement="mysql" identity="true" />
+		</table>
+		<table schema="huawei" tableName="o_outbox"
+			domainObjectName="Ooutbox">
+			<generatedKey column="ouid" sqlStatement="mysql" identity="true" />
+		</table>
+		<table schema="huawei" tableName="o_outsole"
+			domainObjectName="Ooutsole">
+			<generatedKey column="outid" sqlStatement="mysql" identity="true" />
+		</table>
+		<table schema="huawei" tableName="o_payment"
+			domainObjectName="Opayment">
+			<generatedKey column="payid" sqlStatement="mysql" identity="true" />
+		</table>
+		<table schema="huawei" tableName="o_packing"
+			domainObjectName="Opacking">
+			<generatedKey column="paid" sqlStatement="mysql" identity="true" />
+		</table>
+		<table schema="huawei" tableName="o_pilot"
+			domainObjectName="Opilot">
+			<generatedKey column="piid" sqlStatement="mysql" identity="true" />
+		</table>
+		<table schema="huawei" tableName="o_proto"
+			domainObjectName="Oproto">
+			<generatedKey column="prid" sqlStatement="mysql" identity="true" />
+		</table>
+		<table schema="huawei" tableName="o_psample"
+			domainObjectName="Opsample">
+			<generatedKey column="psid" sqlStatement="mysql" identity="true" />
+		</table>
+		<table schema="huawei" tableName="o_sample"
+			domainObjectName="Osample">
+			<generatedKey column="said" sqlStatement="mysql" identity="true" />
+		</table>
+		<table schema="huawei" tableName="o_shaping"
+			domainObjectName="Oshaping">
+			<generatedKey column="shid" sqlStatement="mysql" identity="true" />
+		</table>
+		<table schema="huawei" tableName="o_toplift"
+			domainObjectName="Otoplift">
+			<generatedKey column="toid" sqlStatement="mysql" identity="true" />
+		</table>
+		<table schema="huawei" tableName="o_slast"
+			domainObjectName="Oslast">
+			<generatedKey column="slid" sqlStatement="mysql" identity="true" />
+		</table>
+		<table schema="huawei" tableName="o_shipping"
+			domainObjectName="Oshipping">
+			<generatedKey column="shiid" sqlStatement="mysql" identity="true" />
+		</table>
+		<table schema="huawei" tableName="o_turn"
+			domainObjectName="Oturn">
+			<generatedKey column="tuid" sqlStatement="mysql" identity="true" />
+		</table>
+		
+		<table schema="huawei" tableName="pos_t_aut"
+			domainObjectName="posTAut">
+			<generatedKey column="id" sqlStatement="mysql" identity="true" />
+		</table>
+		<table schema="huawei" tableName="post"
+			domainObjectName="Post">
+			<generatedKey column="pid" sqlStatement="mysql" identity="true" />
+		</table>
+		<table schema="huawei" tableName="user"
+			domainObjectName="User">
+			<generatedKey column="uid" sqlStatement="mysql" identity="true" />
+		</table>
+		<table schema="huawei" tableName="adminer"
+			domainObjectName="Adminer">
+			<generatedKey column="adid" sqlStatement="mysql" identity="true" />
+		</table>-->	
+	</context>
+</generatorConfiguration>

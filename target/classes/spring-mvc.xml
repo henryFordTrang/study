@@ -54,21 +54,22 @@
     </mvc:interceptors>
 
     <!-- Velocity视图解析器    默认视图  -->
-   <bean id="velocityViewResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+     <!--是否使用spring对宏定义的支持-->
+   <!-- <bean id="velocityViewResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
         <property name="contentType" value="text/html;charset=UTF-8"/>
         <property name="viewNames" value="*.html"/>
         <property name="suffix" value=""/>
         <property name="dateToolAttribute" value="date"/>
         <property name="numberToolAttribute" value="number"/>
         <property name="toolboxConfigLocation" value="/WEB-INF/velocity-toolbox.xml"/>
-        <!--是否使用spring对宏定义的支持-->
+       
         <property name="exposeRequestAttributes" value="true"/>
         <property name="requestContextAttribute" value="rc"/>
         <property name="order" value="0"/>
     </bean>
 
     <bean id="velocityConfigurer" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
-        <property name="resourceLoaderPath" value="/WEB-INF/page/"/>
+        <property name="resourceLoaderPath" value="/WEB-INF/"/>
         <property name="velocityProperties">
             <props>
                 <prop key="input.encoding">UTF-8</prop>
@@ -76,7 +77,7 @@
                 <prop key="contentType">text/html;charset=UTF-8</prop>
             </props>
         </property>
-    </bean>
+    </bean> -->
 
     <!-- JSP视图解析器  -->
     <bean id="viewResolverJsp" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
