@@ -54,8 +54,8 @@ public class logInterceptor extends HandlerInterceptorAdapter {
 
         Date start = (Date) request.getAttribute("REQUEST_START_TIME");
         Date end = new Date();
-
-        log.info("本次请求耗时：" + (end.getTime() - start.getTime()) + "毫秒；" + getRequestInfo(request).toString());
+        log.info("本次请求耗时：" + 1000 + "毫秒；"+getRequestInfo(request).toString());
+        //log.info("本次请求耗时：" + (end.getTime() - start.getTime()) + "毫秒；" + getRequestInfo(request).toString());
 
     }
 

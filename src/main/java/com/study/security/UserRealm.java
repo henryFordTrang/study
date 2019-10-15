@@ -46,7 +46,7 @@ public class UserRealm extends AuthorizingRealm {
 		System.out.println("-------------------trang----------------------------");
 		String phonenumber = (String) token.getPrincipal();
         String password = new String((char[]) token.getCredentials());
-       User user=usermapper.qryUserByPhone(phonenumber);
+        User user=usermapper.qryUserByPhone(phonenumber);
         String xxx="92925488b28ab12584ac8fcaa8a27a0f497b2c62940c8f4fbc8ef19ebc87c43e";
         System.out.println("phonenumber:"+phonenumber+"-----------password:"+password);
         Subject subject = SecurityUtils.getSubject();
