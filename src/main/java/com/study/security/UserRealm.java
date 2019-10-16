@@ -29,7 +29,6 @@ public class UserRealm extends AuthorizingRealm {
 		// TODO Auto-generated method stub
 		Log log=LogFactory.getLog(UserRealm.class);
 		log.info("-----------------------------henry-----------------------");
-		System.out.println("-------------------ford----------------------------");
 		User user = (User) principals.getPrimaryPrincipal();
         int userId = user.getUid();
         log.info("userId:"+userId);
@@ -42,18 +41,16 @@ public class UserRealm extends AuthorizingRealm {
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		// TODO Auto-generated method stub
 		Log log=LogFactory.getLog(UserRealm.class);
-		log.info("-----------------------------ngyuen-----------------------");
-		System.out.println("-------------------trang----------------------------");
-		String phonenumber = (String) token.getPrincipal();
+		
+		String userName = (String) token.getPrincipal();
         String password = new String((char[]) token.getCredentials());
-        User user=usermapper.qryUserByPhone(phonenumber);
-        String xxx="92925488b28ab12584ac8fcaa8a27a0f497b2c62940c8f4fbc8ef19ebc87c43e";
-        System.out.println("phonenumber:"+phonenumber+"-----------password:"+password);
+        User user=usermapper.qryUserByPhone("13509309141");
+        log.info("userName:"+userName+"-----------password:"+password+"******"+user);
         Subject subject = SecurityUtils.getSubject();
         Session session = subject.getSession(true);
         session.setAttribute(Global.CURRENT_USER, user);
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user.getPhonenumber(),
-                user.getUpassword(), getName());
+        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user.getUname(),
+        		password, getName());
 		//SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user, xxx, getName());
 		return info;
 	}

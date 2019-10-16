@@ -284,7 +284,8 @@
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-redis</artifactId>
             <version>${spring-data-redis.version}</version>
-        </dependency>  
+        </dependency>
+        
     </dependencies>
     <build>
     	<finalName>study</finalName>

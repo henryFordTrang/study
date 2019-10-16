@@ -1,5 +1,6 @@
 package com.study;
 
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.junit.Test;
 
@@ -8,8 +9,10 @@ import redis.clients.jedis.Jedis;
 public class test {
 	public static void main(String[] args){
 		String x=new Sha256Hash("888888").toHex();
-		System.out.println(x);
-		redisTester();
+		String y=new Md5Hash("888888").toHex();
+		//System.out.println(x);
+		System.out.println(y);
+		//redisTester();
 	}
 	
 	@Test
