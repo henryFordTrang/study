@@ -319,4 +319,7 @@
  <select id="qryUserByPhone" resultType="com.study.model.User">
  	select * from user where phonenumber=#{phone}
  </select>
+ <select id="redisTest" resultType="java.lang.String">
+ select uphoto from user where uid=#{uid}
+ </select>
 </mapper>

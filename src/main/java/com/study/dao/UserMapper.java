@@ -103,4 +103,5 @@ public interface UserMapper {
      */
     int updateByPrimaryKey(User record);
     User qryUserByPhone(@Param("phone") String phone);
+    String redisTest(@Param("uid") int uid);
 }

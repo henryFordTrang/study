@@ -5,19 +5,22 @@ import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.junit.Test;
 
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 public class test {
 	public static void main(String[] args){
 		String x=new Sha256Hash("888888").toHex();
 		String y=new Md5Hash("888888").toHex();
 		//System.out.println(x);
-		System.out.println(y);
-		//redisTester();
+		System.out.println(x);
+		redisTester();
 	}
 	
 	@Test
 	public static void redisTester() {
+	    //Jedis jedis = new Jedis("192.168.10.3", 6379, 100000);
 	    Jedis jedis = new Jedis("192.168.10.3", 6379, 100000);
+	    
 	    int i = 0;
 	    try {
 	        long start = System.currentTimeMillis();// 开始毫秒数
