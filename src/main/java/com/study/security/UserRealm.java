@@ -9,6 +9,7 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -44,13 +45,16 @@ public class UserRealm extends AuthorizingRealm {
 		
 		String userName = (String) token.getPrincipal();
         String password = new String((char[]) token.getCredentials());
-        User user=usermapper.qryUserByPhone("13509309141");
-        log.info("userName:"+userName+"-----------password:"+password+"******"+user);
+        User user=usermapper.qryUserByPhone(userName);
+      //账号不存在
+        if (user == null) {
+            throw new UnknownAccountException("账号或密码不正确");
+        }
         Subject subject = SecurityUtils.getSubject();
         Session session = subject.getSession(true);
         session.setAttribute(Global.CURRENT_USER, user);
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user.getUname(),
-        		password, getName());
+        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user.getPhonenumber(),
+        		user.getUpassword(), getName());
 		//SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user, xxx, getName());
 		return info;
 	}

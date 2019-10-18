@@ -1,7 +1,16 @@
 package com.study;
 
+import java.io.File;
+import java.io.InputStream;
+
+import org.apache.shiro.authc.AuthenticationInfo;
+import org.apache.shiro.codec.Base64;
+import org.apache.shiro.codec.Hex;
+import org.apache.shiro.crypto.hash.AbstractHash;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.crypto.hash.Sha256Hash;
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.util.ByteSource;
 import org.junit.Test;
 
 import redis.clients.jedis.Jedis;
@@ -9,12 +18,18 @@ import redis.clients.jedis.JedisPool;
 
 public class test {
 	public static void main(String[] args){
-		String x=new Sha256Hash("888888").toHex();
+		String x=new Sha256Hash("21218cca77804d2ba1922c33e0151105").toHex();
 		String y=new Md5Hash("888888").toHex();
-		//System.out.println(x);
+		String z=new Md5Hash("92925488b28ab12584ac8fcaa8a27a0f497b2c62940c8f4fbc8ef19ebc87c43e").toHex();
+		String r=new Md5Hash("46cc468df60c961d8da2326337c7aa58").toHex();
 		System.out.println(x);
-		redisTester();
+		System.out.println(y);
+		System.out.println(z);
+		System.out.println(r);
+		//redisTester();
 	}
+	
+	
 	
 	@Test
 	public static void redisTester() {

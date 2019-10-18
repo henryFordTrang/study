@@ -2,6 +2,8 @@ package com.study.controller;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.crypto.hash.Sha256Hash;
@@ -36,7 +38,7 @@ public class loginController {
 	@Autowired JedisPool jedisPool;
 	
 	
-	@RequestMapping("/login1")
+	@RequestMapping("/login")
 	@ResponseBody
 	public String login(@RequestBody User user){
 		Subject subject = ShiroUtils.getSubject();
@@ -45,12 +47,17 @@ public class loginController {
         //sha256加密
 		String password=new Md5Hash(user.getUpassword()).toHex();
        //String password = new Sha256Hash(user.getUpassword()).toHex();	
-       UsernamePasswordToken token = new UsernamePasswordToken(user1.getUname(), password);
-       subject.login(token);
+       UsernamePasswordToken token = new UsernamePasswordToken(user.getPhonenumber(), password);
+       try {
+    	   subject.login(token);
+       } catch (UnknownAccountException e) {
+		// TODO: handle exception
+       }
+       
 		return null;		
 	}
 	
-	@RequestMapping("/login")
+	@RequestMapping("/login1")
 	@ResponseBody
 	public String login1(@RequestBody User user){
 //		test();
@@ -65,8 +72,7 @@ public class loginController {
 			return xxx;
 		}else{
 			log.info("data from data base");
-			yyy.set("loginInfo", red.cacheable(18));
-			
+			yyy.set("loginInfo", red.cacheable(18));			
 			return red.cacheable(18);
 		}
 			
