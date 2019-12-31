@@ -35,6 +35,11 @@
         <kaptcha.version>0.0.9</kaptcha.version>
         <spring-data-redis.version>1.6.0.RELEASE</spring-data-redis.version>        
         <jedis.version>2.7.3</jedis.version>
+        <ijapy.version>1.1.4</ijapy.version>
+		<zxing.version>3.2.1</zxing.version>
+		<weixin-java-mp.version>2.8.0</weixin-java-mp.version>
+		<jackson.version>2.5.0</jackson.version>
+		<version>v0.10.52</version>
     </properties>
 
     <!-- 阿里云maven仓库 -->
@@ -285,7 +290,108 @@
             <artifactId>spring-data-redis</artifactId>
             <version>${spring-data-redis.version}</version>
         </dependency>
-        
+        <!-- 支付宝 -->		
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<!-- <dependency>
+		    <groupId>com.alipay.sdk</groupId>
+		    <artifactId>alipay-sdk-java</artifactId>
+		    <version>3.7.110.ALL</version>
+		</dependency> -->
+		<dependency>
+		    <groupId>com.pentahohub.nexus</groupId>
+		    <artifactId>alipay-sdk-java</artifactId>
+		    <version>20150820220052</version>
+		</dependency>		
+		<dependency>
+	    	<groupId>com.baidubce</groupId>
+		    <artifactId>bce-java-sdk</artifactId>
+		    <version>0.10.21</version>
+		</dependency>
+		<dependency>
+            <groupId>org.eclipse.paho</groupId>
+            <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+        <dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.8.2</version>
+		</dependency>
+		<dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+		    <groupId>javax.websocket</groupId>
+		    <artifactId>javax.websocket-api</artifactId>
+		    <version>1.1</version>
+		    <scope>provided</scope>
+		</dependency>
+		<dependency>
+		    <groupId>javax</groupId>
+		    <artifactId>javaee-api</artifactId>
+		    <version>7.0</version>
+		    <scope>provided</scope>
+		</dependency>
+		<dependency>
+		　　<groupId>org.java-websocket</groupId>
+		　　<artifactId>Java-WebSocket</artifactId>
+		　　<version>1.3.8</version>
+		</dependency>
+		<!-- 
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.10</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.25</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.25</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.binarywang</groupId>
+			<artifactId>weixin-java-mp</artifactId>
+			<version>${weixin-java-mp.version}</version>
+		</dependency>
+        <dependency>
+    <groupId>com.baidubce</groupId>
+    <artifactId>bce-java-sdk</artifactId>
+    <version>${version}</version>
+</dependency> -->
     </dependencies>
     <build>
     	<finalName>study</finalName>

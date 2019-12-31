@@ -1,5 +1,7 @@
 package com.study.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.shiro.authc.AuthenticationException;
@@ -25,6 +27,7 @@ import com.study.model.User;
 import com.study.security.UserRealm;
 import com.study.service.redis;
 import com.study.util.ShiroUtils;
+import com.study.util.secutiryUtil;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -33,14 +36,37 @@ import redis.clients.jedis.JedisPool;
 @RequestMapping("/admin")
 public class loginController {
 	Log log=LogFactory.getLog(loginController.class);
+	secutiryUtil securityutil=new secutiryUtil();
 	@Autowired UserMapper usermapper;
 	@Autowired redis red;	
 	@Autowired JedisPool jedisPool;
 	
-	
 	@RequestMapping("/login")
 	@ResponseBody
-	public String login(@RequestBody User user){
+	public String login(@RequestBody User user,HttpServletRequest request){
+		Subject subject = ShiroUtils.getSubject();
+		log.info(user);
+		User user1=usermapper.qryUserByPhone(user.getPhonenumber());
+        //sha256加密
+		String password=new Md5Hash(user.getUpassword()).toHex();
+       //String password = new Sha256Hash(user.getUpassword()).toHex();	
+       UsernamePasswordToken token = new UsernamePasswordToken(user.getPhonenumber(), password);
+//       try {
+//    	   subject.login(token);
+//       } catch (UnknownAccountException e) {
+//		// TODO: handle exception
+//       }
+       String ip=securityutil.getIpAddrByRequest(request);
+       Session session=subject.getSession();
+       session.setAttribute("ip", ip);
+       request.getSession().setAttribute("addr", ip);
+       System.out.println(session+"=============");
+       System.out.println(request.getSession().toString()+"----------stringify---request----------");
+		return null;		
+	}
+	@RequestMapping("/login2")
+	@ResponseBody
+	public String login2(@RequestBody User user){
 		Subject subject = ShiroUtils.getSubject();
 		log.info(user);
 		User user1=usermapper.qryUserByPhone(user.getPhonenumber());
@@ -80,13 +106,24 @@ public class loginController {
 	
 	@RequestMapping("/delete")
 	@ResponseBody
-	public String login2(){
-//		test();
-//		return "xxxx";
-//		
-		Jedis jedis = jedisPool.getResource();
-		jedis.del("loginInfo");
+	public String login2(HttpServletRequest request){
+		Subject subject = ShiroUtils.getSubject();
+		Session session=subject.getSession();
+		String ip=securityutil.getIpAddrByRequest(request);
+		String addr=(String) request.getSession().getAttribute("addr");
+		System.out.println(session.getAttribute("ip")+"ip----------------"+ip);
+		System.out.println(ip+"ip versus addr"+addr);
+		if(ip.equals(session.getAttribute("ip"))){
+			System.out.println("登录过,调用delete接口");
+		}else{
+			System.out.println("ip验证失败..............");
+		}
 		
+		if(ip.equals(addr)){
+			System.out.println("addr 验证成功");
+		}else{
+			System.out.println("addr验证失败..............");
+		}
 		return null;	
 	}
 	
