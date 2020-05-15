@@ -15,11 +15,11 @@ import redis.clients.jedis.JedisPool;
 public class redisImp implements redis {
 	@Autowired UserMapper um;
 	
-	@Override
-	public String cacheable(int key) {
-		// TODO Auto-generated method stub
-		
-		return um.redisTest(key);
-	}
+//	@Override
+//	public String cacheable(int key) {
+//		// TODO Auto-generated method stub
+//		
+//		return um.redisTest(key);
+//	}
 
 }

@@ -1,7 +1,12 @@
 package com.study;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
+import java.util.Properties;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.codec.Base64;
@@ -12,24 +17,46 @@ import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
 import org.junit.Test;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 public class test {
 	public static void main(String[] args){
-		String x=new Sha256Hash("21218cca77804d2ba1922c33e0151105").toHex();
-		String y=new Md5Hash("888888").toHex();
-		String z=new Md5Hash("92925488b28ab12584ac8fcaa8a27a0f497b2c62940c8f4fbc8ef19ebc87c43e").toHex();
-		String r=new Md5Hash("46cc468df60c961d8da2326337c7aa58").toHex();
-		System.out.println(x);
-		System.out.println(y);
-		System.out.println(z);
-		System.out.println(r);
-		//redisTester();
+		
 	}
 	
-	
+	public static void element(NodeList list){
+        for (int i = 0; i <list.getLength() ; i++) {
+            Element element = (Element) list.item(i);
+            NodeList childNodes = element.getChildNodes();
+            for (int j = 0; j <childNodes.getLength() ; j++) {
+                if (childNodes.item(j).getNodeType()==Node.ELEMENT_NODE) {
+                    //获取节点
+                    System.out.print(childNodes.item(j).getNodeName() + ":");
+                    //获取节点值
+                    System.out.println(childNodes.item(j).getFirstChild().getNodeValue());
+                }
+            }
+        }
+    }
+
+    public static void node(NodeList list){
+        for (int i = 0; i <list.getLength() ; i++) {
+            Node node = list.item(i);
+            NodeList childNodes = node.getChildNodes();
+            for (int j = 0; j <childNodes.getLength() ; j++) {
+                if (childNodes.item(j).getNodeType()==Node.ELEMENT_NODE) {
+                    System.out.print(childNodes.item(j).getNodeName() + ":");
+                    System.out.println(childNodes.item(j).getFirstChild().getNodeValue());
+                }
+            }
+        }
+    }
 	
 	@Test
 	public static void redisTester() {

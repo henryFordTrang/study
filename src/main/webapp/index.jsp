@@ -18,6 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
+	<script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.11.0/jquery.js"></script>
   </head>
   
   <body>
@@ -55,4 +56,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 		</form>
   </body>
+  <script>
+  $(function(){
+      if ('WebSocket' in window) {
+        _this.websocket = new WebSocket('ws://192.168.10.54:8080/StuLo');
+      } else {
+        alert('当前浏览器 Not support websocket');
+      }
+  })
+  </script>
 </html>

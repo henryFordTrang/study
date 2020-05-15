@@ -943,4 +943,7 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectAllOrders">
+  select * from orders
+  </select>
 </mapper>

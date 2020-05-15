@@ -102,4 +102,5 @@ public interface OrdersMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(Orders record);
+    List<Orders>selectAllOrders();
 }

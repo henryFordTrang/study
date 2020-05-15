@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,12 +24,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.study.dao.UserMapper;
 import com.study.model.User;
 import com.study.security.UserRealm;
-import com.study.service.redis;
 import com.study.util.ShiroUtils;
 import com.study.util.secutiryUtil;
-
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
 
 @Controller
 @RequestMapping("/admin")
@@ -38,8 +33,8 @@ public class loginController {
 	Log log=LogFactory.getLog(loginController.class);
 	secutiryUtil securityutil=new secutiryUtil();
 	@Autowired UserMapper usermapper;
-	@Autowired redis red;	
-	@Autowired JedisPool jedisPool;
+	//@Autowired redis red;	
+	//@Autowired JedisPool jedisPool;
 	
 	@RequestMapping("/login")
 	@ResponseBody
@@ -90,18 +85,19 @@ public class loginController {
 //		return "xxxx";
 //		
 		//Jedis jedis = new Jedis("192.168.10.3", 6379, 100000);
-		Jedis yyy=jedisPool.getResource();
+		//Jedis yyy=jedisPool.getResource();
 		//String xxx=jedis.get("loginInfo");
-		String xxx=yyy.get("loginInfo");
-		if(xxx!=null){
-			log.info("data from memory............");
-			return xxx;
-		}else{
-			log.info("data from data base");
-			yyy.set("loginInfo", red.cacheable(18));			
-			return red.cacheable(18);
-		}
-			
+//		String xxx=yyy.get("loginInfo");
+//		if(xxx!=null){
+//			log.info("data from memory............");
+//			return xxx;
+//		}else{
+//			log.info("data from data base");
+//			//yyy.set("loginInfo", red.cacheable(18));			
+//			//return red.cacheable(18);
+//			return null;
+//		}
+		return null;
 	}
 	
 	@RequestMapping("/delete")
@@ -129,14 +125,14 @@ public class loginController {
 	
 	@Test
 	public void test() {
-	    ApplicationContext context =
-	            new ClassPathXmlApplicationContext("platform-redis.xml");
-	    RedisTemplate redisTemplate = context.getBean(RedisTemplate.class);	    
-	    Student student = new Student();
-	    student.setName("我没有三颗心脏");
-	    student.setAge(21);
-	    redisTemplate.opsForValue().set("student_1", student);
-	    Student student1 = (Student) redisTemplate.opsForValue().get("student_1");
-	    student1.service();
+//	    ApplicationContext context =
+//	            new ClassPathXmlApplicationContext("platform-redis.xml");
+//	    RedisTemplate redisTemplate = context.getBean(RedisTemplate.class);	    
+//	    Student student = new Student();
+//	    student.setName("我没有三颗心脏");
+//	    student.setAge(21);
+//	    redisTemplate.opsForValue().set("student_1", student);
+//	    Student student1 = (Student) redisTemplate.opsForValue().get("student_1");
+//	    student1.service();
 	}
 }
