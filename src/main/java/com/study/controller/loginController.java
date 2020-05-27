@@ -12,6 +12,7 @@ import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.junit.Test;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.ApplicationContext;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.study.dao.UserMapper;
 import com.study.model.User;
+import com.study.rabbitMQ.MqMessage;
 import com.study.security.UserRealm;
 import com.study.util.ShiroUtils;
 import com.study.util.secutiryUtil;
@@ -35,6 +37,16 @@ public class loginController {
 	@Autowired UserMapper usermapper;
 	//@Autowired redis red;	
 	//@Autowired JedisPool jedisPool;
+	
+	@Autowired
+	private AmqpTemplate ss;
+	
+	@RequestMapping("/mqSend")
+	@ResponseBody
+	public void mqSend(){
+		MqMessage mqMessage = new MqMessage();
+		ss.convertAndSend(mqMessage);
+	}
 	
 	@RequestMapping("/login")
 	@ResponseBody
