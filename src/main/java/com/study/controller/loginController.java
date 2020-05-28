@@ -45,7 +45,13 @@ public class loginController {
 	@ResponseBody
 	public void mqSend(){
 		MqMessage mqMessage = new MqMessage();
-		ss.convertAndSend(mqMessage);
+		mqMessage.setSn("1111111111");
+		System.out.println("amqpTemplate....convertAndSend");
+		String queue = "queue.padbook69";
+		String exchange = "exchange.platform";
+		//ss.convertAndSend(queue, mqMessage);
+		ss.convertAndSend("queue.padbook69", "77777777");
+		//ss.convertAndSend(mqMessage);
 	}
 	
 	@RequestMapping("/login")

@@ -16,30 +16,44 @@
 		http://www.springframework.org/schema/rabbit 
         http://www.springframework.org/schema/rabbit/spring-rabbit-1.7.xsd">
     <context:property-placeholder location="classpath*:platform.properties"/>
+	<bean id="listeningclass" class="com.study.rabbitMQ.listener"></bean>
 	<!--配置connection-factory，指定连接rabbit server参数 -->
 	<rabbit:connection-factory id="connectionFactory"
 		host="${mq.host}" port="${mq.port}" username="${mq.username}"
-		password="${mq.password}" cache-mode="CHANNEL" publisher-confirms="true" publisher-returns="true" connection-timeout="200"/>
-	<!--通过指定下面的admin信息，当前producer中的exchange和queue会在rabbitmq服务器上自动生成 -->
+		password="${mq.password}" cache-mode="CHANNEL" publisher-confirms="true" publisher-returns="true" connection-timeout="1000"/>
+		<!--通过指定下面的admin信息，当前producer中的exchange和queue会在rabbitmq服务器上自动生成 -->
 	<rabbit:admin connection-factory="connectionFactory" />
-	<!-- 
-	<rabbit:template id="rabbitMqTemplate" connection-factory="connectionFactory" />
-	-->
+	<rabbit:template id="amqpTemplate" connection-factory="connectionFactory" />
+	<!--  <rabbit:fanout-exchange name="exchange.platform"></rabbit:fanout-exchange>-->
+	<rabbit:fanout-exchange name="${exchange.platform}">  
+        <rabbit:bindings>  
+            <rabbit:binding queue="${queue.padbook}" />  
+        </rabbit:bindings>  
+    </rabbit:fanout-exchange> 
 	<!--定义queue  说明：durable:是否持久化 exclusive: 仅创建者可以使用的私有队列，断开后自动删除 auto_delete: 当所有消费客户端连接断开后，是否自动删除队列-->
-	<rabbit:queue name="${queue.platform}" durable="true" auto-delete="false" exclusive="false" />
+	<rabbit:queue name="${queue.padbook}" durable="true" auto-delete="false" exclusive="false" />
 	<!-- 消息接收者 -->	
-	<!-- 消息发送 -->
+	<!-- queue litener 观察 监听模式 当有消息到达时会通知监听在对应的队列上的监听对象 -->
+	<rabbit:listener-container connection-factory="connectionFactory" >
+	     <rabbit:listener  queues="${queue.padbook}"  ref="listeningclass"/>
+	</rabbit:listener-container>
+    
+    <!-- <bean id="listeningclass" class="com.study.rabbitMQ.listener"></bean>
+	<rabbit:connection-factory id="connectionFactory"
+		host="${mq.host}" port="${mq.port}" username="${mq.username}"
+		password="${mq.password}" cache-mode="CHANNEL" publisher-confirms="true" publisher-returns="true" connection-timeout="200"/>
+	<rabbit:admin connection-factory="connectionFactory" />
+	<rabbit:queue name="${queue.padbook}" durable="true" auto-delete="false" exclusive="false" />
 	<rabbit:fanout-exchange name="${exchange.platform}">  
         <rabbit:bindings>  
             <rabbit:binding queue="${queue.platform}" />  
         </rabbit:bindings>  
     </rabbit:fanout-exchange>  
-    
-    <!-- spring amqp默认的是jackson 的一个插件,目的将生产者生产的数据转换为json存入消息队列，由于Gson的速度快于jackson,这里替换为Gson的一个实现 -->  
     <bean id="jsonMessageConverter"  
-        class="com.zhuyun.rabbit.Gson2JsonMessageConverter" />  
-  
-    <!-- spring template声明 -->  
+        class="com.study.rabbitMQ.Gson2JsonMessageConverter" />  
     <rabbit:template id="amqpTemplate" exchange="${exchange.platform}"  routing-key="queue.platform.send"  
-        connection-factory="connectionFactory" message-converter="jsonMessageConverter" />  
+        connection-factory="connectionFactory" message-converter="jsonMessageConverter" /> 
+    <rabbit:listener-container connection-factory="connectionFactory" >
+	     <rabbit:listener  queues="${queue.padbook}"  ref="listeningclass"/>
+	</rabbit:listener-container>  -->
 </beans>

@@ -10,7 +10,7 @@ public class listener implements MessageListener  {
 		// TODO Auto-generated method stub
 		String msg=  new String (message.getBody());
 		//MqMessage mqMsg = JsonUtil.parseObject(msg, MqMessage.class);
-		System.out.println(msg);
+		System.err.println("onmessage监听"+msg);
 	}
 
 }
