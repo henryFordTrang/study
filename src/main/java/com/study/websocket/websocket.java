@@ -40,7 +40,7 @@ public class websocket {
 		 this.session=session;
 		 userno = param;
 		 map.put(session.getId(),param);
-		 System.out.println("打开了连接"+session+userno+"连上来了");
+		 System.out.println("打开了连接"+session.getId()+userno+"连上来了");
 		 //webSocketSet.add(this);
 		 webSocketSet.put(param, this);
 	 }

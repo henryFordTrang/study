@@ -20,8 +20,9 @@ import com.google.gson.JsonArray;
 public class iotTest {
 	public static void main(String[] args) {
         final String broker       = "tcp://cyqitud.mqtt.iot.gz.baidubce.com:1883";
+        							 //tcp://81891x2.mqtt.iot.gz.baidubce.com:1883
         //final String clientId     = "test_mqtt_java_" + UUID.randomUUID().toString();
-        final String clientId     = "temperatureshadow";
+        final String clientId     = "temperatureshadow" + UUID.randomUUID().toString();
         final String username     = "cyqitud/temperatureshadow";
         final String password     = "f1447wy0mq824v13";
 
