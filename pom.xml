@@ -181,6 +181,11 @@
             <artifactId>commons-configuration</artifactId>
             <version>${commons-configuration-version}</version>
         </dependency>
+		<dependency>
+    	<groupId>commons-net</groupId>
+		    <artifactId>commons-net</artifactId>
+		    <version>3.4</version>
+		</dependency>
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-core</artifactId>

@@ -22,12 +22,19 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.alibaba.fastjson.JSON;
+import com.study.model.chatUser;
+
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 public class test {
 	public static void main(String[] args){
-		
+		chatUser chatuser=new chatUser();
+		chatuser.setId("100");
+		chatuser.setMessage("sdfsdfsdfds");
+		String xx = JSON.toJSON(chatuser).toString();
+		System.out.println(xx);
 	}
 	
 	public static void element(NodeList list){

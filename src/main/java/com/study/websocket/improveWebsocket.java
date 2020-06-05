@@ -17,6 +17,7 @@ import javax.websocket.server.ServerEndpoint;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.study.model.chatUser;
 
 @ServerEndpoint("/websocket/czd/{userno}")
@@ -49,7 +50,10 @@ public class improveWebsocket {
 		        if (s != null) {
 		        	chatUser user = new chatUser();
 			    	user.setId(publisher);
-			    	user.setMessage(clientInfoJson);
+			    	   JSONObject json = JSONObject.parseObject(clientInfoJson);
+			    	   System.err.println(json.toString());  
+			    	user.setMessage(json.get("message").toString());
+			    	user.setIsPic(json.get("ifpic").toString());
 		            // 判断是否为终端信息。如果是终端信息则查询数据库获取detail
 		                //s.session.getBasicRemote().sendText(clientInfoJson);
 		                //s.session.getAsyncRemote().sendObject(user);
