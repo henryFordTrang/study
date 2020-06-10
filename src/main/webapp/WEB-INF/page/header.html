@@ -1,0 +1,170 @@
+<html>
+<head>
+    <title>字典</title>
+    <link rel="stylesheet" href="/study/statics/css/login.css">   
+</head>
+<style>
+    .i-Layout{
+        border: 1px solid #d7dde4;
+        background: #f5f7f9;
+        width:100%;
+        height:100%;
+    }
+    .i-Layout-logo{
+        width: 100px;
+        height: 30px;
+        background: #5b6270;
+        border-radius: 3px;
+        float: left;
+        position: relative;
+        top: 15px;
+        left: 20px;
+    }
+    .i-Layout-nav{
+        width: 420px;
+        margin: 0 auto;
+    }
+    .i-Layout-assistant{
+        width: 300px;
+        margin: 0 auto;
+        height: inherit;
+    }
+    .i-Layout-breadcrumb{
+        padding: 10px 15px 0;
+    }
+    .i-Layout-i-Content{
+        min-height: 200px;
+        height:calc(100% - 80px);
+        margin: 15px;
+        overflow: hidden;
+        background: #fff;
+        border-radius: 4px;
+    }
+    .i-Layout-i-Content-main{
+        padding: 10px;
+    }
+    .i-Layout-copy{
+        text-align: center;
+        padding: 10px 0 20px;
+        color: #9ea7b4;
+    }
+    .innerwrapper{
+    	padding-top:80px;
+    	background-color:yellowgreen;
+    }
+    .item1{
+    	padding:40px;
+    	text-align:right;
+    }
+</style>
+<script src="/study/statics/libs/header.js"></script>
+<body>
+<div id="vue">
+    <div class="i-Layout">
+        <!-- <i-Menu mode="horizontal" theme="primary" active-key="1">
+        </i-Menu> -->
+        <div class="i-Layout-i-Content">
+            	<row class="login-main">
+			      <i-col span="12">
+			        <div class="show-figure"></div>
+			      </i-col>
+			      <i-col span="12">
+			        <card class="login-card">
+			          <div class="card-header">
+			            <h1 class="title">随便玩*玩</h1>
+			          </div>
+			          <div class="card-main">
+			            <div class="form-group">
+			              <i-input v-model="username" @on-enter="login" placeholder="账号" autofocus></i-input>
+			            </div>
+			            <div class="form-group">
+			              <i-input type="password" v-model="password" @on-enter="login" placeholder="密码"></i-input>
+			            </div>
+			            <div class="form-group">
+			              <i-input class="verify-input" v-model="captcha" @on-enter="login" placeholder="验证码"></i-input>
+			              <img class="verify-img" alt="如果看不清楚，请单击图片刷新！" title="点击刷新" class="pointer" :src="src" @click="refreshCode">
+			            </div>
+			          </div>
+			          <div class="card-footer">
+			            <i-button type="primary" long @click="login">登录</i-button>
+			          </div>
+			        </card>
+			      </i-col>
+			    </row>
+			    <!-- <row class="innerwrapper">
+			    	<i-col span="12" class="item">
+			    	<div class="show-figure"></div>
+			    	</i-col>
+			    	<i-col span="12" class="item1">
+			    	<Card style="width:300px;height:400px;" :shadow="true">
+				       			        
+				    </Card>
+			    	</i-col>
+			    </row> -->
+        </div>
+       
+        <div class="i-Layout-copy">
+            2011-2016 &copy; TalkingData
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript">
+var vm = new Vue({
+	el: '#vue',
+	data(){
+		return{
+			src:"/study/sys/captcha",
+			isCollapsed: false,
+			 username: '',
+		        password: '',
+		        captcha : '',
+		}
+	},
+	computed: {
+        rotateIcon () {
+            return [
+                'menu-icon',
+                this.isCollapsed ? 'rotate-icon' : ''
+            ];
+        },
+        menuitemClasses () {
+            return [
+                'menu-item',
+                this.isCollapsed ? 'collapsed-menu' : ''
+            ]
+        }
+    },
+	methods: {
+		refreshCode: function () {
+			this.src="/study/sys/captcha?t="+$.now();
+		},
+		collapsedSider () {
+            this.$refs.side1.toggleCollapse();
+        },
+        login(){
+        	console.log(this.username,this.password,this.captcha);
+        	var data = 'username=' + vm.username + '&password=' + vm.password + '&captcha=' + vm.captcha;
+            $.ajax({
+              type    : 'POST',
+              url     : '/study/sys/login',
+              data    : data,
+              dataType: 'json',
+              success : function (result) {
+                if (result.code == 0) {//登录成功
+                  parent.location.href = 'index.html';
+                } else {
+                  vm.refreshCode();
+                  iview.Message.error(result.msg);
+                }
+              }
+            });
+        }
+	},
+	mounted(){
+		console.log('after load...');
+	}
+})
+</script>
+</body>
+</html>

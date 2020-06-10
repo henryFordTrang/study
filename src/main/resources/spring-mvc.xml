@@ -55,13 +55,13 @@
 
     <!-- Velocity视图解析器    默认视图  -->
      <!--是否使用spring对宏定义的支持-->
-   <!-- <bean id="velocityViewResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+   <bean id="velocityViewResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
         <property name="contentType" value="text/html;charset=UTF-8"/>
         <property name="viewNames" value="*.html"/>
         <property name="suffix" value=""/>
         <property name="dateToolAttribute" value="date"/>
         <property name="numberToolAttribute" value="number"/>
-        <property name="toolboxConfigLocation" value="/WEB-INF/velocity-toolbox.xml"/>
+        <!-- <property name="toolboxConfigLocation" value="/WEB-INF/velocity-toolbox.xml"/> -->
        
         <property name="exposeRequestAttributes" value="true"/>
         <property name="requestContextAttribute" value="rc"/>
@@ -69,7 +69,7 @@
     </bean>
 
     <bean id="velocityConfigurer" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
-        <property name="resourceLoaderPath" value="/WEB-INF/"/>
+        <property name="resourceLoaderPath" value="/WEB-INF/page/"/>
         <property name="velocityProperties">
             <props>
                 <prop key="input.encoding">UTF-8</prop>
@@ -77,31 +77,34 @@
                 <prop key="contentType">text/html;charset=UTF-8</prop>
             </props>
         </property>
-    </bean> -->
+    </bean>
 
     <!-- JSP视图解析器  -->
     <bean id="viewResolverJsp" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/page/"/>
         <property name="suffix" value=".jsp"/>
+       <property name="order" value="3"/>
     </bean>
 
-    <!-- FreeMarker视图解析器 -->
-    <!-- <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
-        <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"/>
-        <property name="contentType" value="text/html; charset=utf-8"/>
-        <property name="cache" value="false"/>
-        <property name="viewNames" value="*.ftl"/>
-        <property name="suffix" value=""/>
-        <property name="order" value="2"/>
+    <!-- FreeMarker视图解析器  -->
+     <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">  
+        <property name="templateLoaderPath">  
+            <value>/WEB-INF/page/</value>  
+        </property>
+    </bean>  
+     <bean id="htmlviewResolver"  
+        class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">  
+        <property name="suffix" value=".html" /> 
+        <property name="order" value="1"></property> 
+        <property name="contentType" value="text/html;charset=UTF-8"></property>         
     </bean>
-
-    <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-        <property name="templateLoaderPath" value="/WEB-INF/page/"/>
-    </bean> -->
-
-    <bean id="multipartResolver"
-          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <property name="maxUploadSize" value="1000000000"/>
+    
+   <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">   
+        <property name="prefix" value="/WEB-INF/page/" />
+        <property name="suffix" value=".jsp" />
+        <property name="viewClass" value="org.springframework.web.servlet.view.InternalResourceView"/>
+        <property name="contentType" value="text/html;charset=UTF-8"/>
+         <property name="order" value="2"/>
     </bean>
 
     <!-- Kaptcha验证码生成器 -->
@@ -114,7 +117,7 @@
                         <prop key="kaptcha.textproducer.font.color">black</prop>
                         <prop key="kaptcha.textproducer.char.space">4</prop>
                         <prop key="kaptcha.textproducer.char.length">4</prop>
-                        <prop key="kaptcha.textproducer.char.string">123456789</prop>
+                        <prop key="kaptcha.textproducer.char.string">0123456789</prop>
                     </props>
                 </constructor-arg>
             </bean>

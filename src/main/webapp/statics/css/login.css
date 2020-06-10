@@ -1,0 +1,107 @@
+html {
+  height: 100%;
+}
+
+body.login-page {
+  /*background: url("../img/login_bg.jpg") no-repeat center/cover fixed;*/
+}
+
+.loginscreen {
+  position: relative;
+  height: 100%;
+  overflow: auto;
+}
+
+/* main区域
+ ********************/
+.login-main {
+  position: relative;
+  height: calc(100% - 80px);
+  min-height: 524px;
+  padding-top: 80px;
+}
+
+.show-figure {
+  float: right;
+  width: 651px;
+  height: 524px;
+  margin-right: 20px;
+  background: url("../img/login-show-bg.png") no-repeat center center/cover;
+}
+
+/* 登录框
+ ********************/
+.login-card {
+  position: relative;
+  width: 360px;
+  height: 424px;
+  margin: 50px 0 50px 160px;
+  padding: 44px 34px 70px;
+}
+
+.login-card .card-header {
+  position: relative;
+  height: 50px;
+  margin: -16px -16px 0;
+}
+
+.login-card .card-header .title {
+  padding: 5px 0 18px;
+  border-bottom: 1px solid #eee;
+  line-height: 1;
+  font-size: 27px;
+  font-weight: 500;
+  letter-spacing: 2px;
+}
+
+.login-card .card-main {
+  position: relative;
+  margin-top: 24px;
+  padding: 0 0 0 10px;
+}
+
+.login-card .form-group {
+  margin-bottom: 17px;
+  overflow: hidden;
+}
+
+.login-card .form-group .ivu-input {
+  height: 40px;
+}
+
+.login-card .form-group .verify-input {
+  float: left;
+  width: 120px;
+}
+
+.login-card .form-group .verify-img {
+  float: right;
+  width: 116px;
+  height: 38px;
+  border-radius: 4px;
+  margin: 1px 0 1px 4px;
+}
+
+.login-card .card-footer {
+  position: relative;
+  padding: 6px 0 0 10px;
+}
+
+.login-card .card-footer .ivu-btn {
+  height: 40px;
+  font-size: 16px;
+}
+
+/* footer区域
+ ********************/
+.login-footer {
+  position: relative;
+  height: 80px;
+}
+
+.login-footer .copyright {
+  padding: 8px 0;
+  text-align: center;
+  font-size: 14px;
+  color: #333;
+}

@@ -55,14 +55,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</dl>
 			</div>
 		</form>
+		<button class="new-btn-login" type="button" style="text-align: center;" id="jsp">jsp</button>
+		<button class="new-btn-login" type="button" style="text-align: center;" id="html">html</button>
   </body>
   <script>
   $(function(){
-      if ('WebSocket' in window) {
+     /*  if ('WebSocket' in window) {
         _this.websocket = new WebSocket('ws://192.168.10.54:8080/StuLo');
       } else {
         alert('当前浏览器 Not support websocket');
-      }
+      } */
+      
+      $('#jsp').click(function(){
+    	  $.ajax({
+        	  url:'/study/admin/jsp',
+              type: "GET",
+    		    contentType: "application/json",
+        	  onsuccess:function(data){
+        		  console.log(data);
+        	  }
+          })
+      })
+      $('#html').click(function(){
+    	  $.ajax({
+        	  url:'/study/admin/html',
+              type: "GET",
+    		    contentType: "application/json",
+        	  onsuccess:function(data){
+        		  console.log(data);
+        	  }
+          })
+      })
   })
   </script>
 </html>

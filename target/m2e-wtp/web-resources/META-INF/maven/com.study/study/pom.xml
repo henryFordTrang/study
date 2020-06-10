@@ -31,7 +31,7 @@
         <velocity-tools-version>2.0</velocity-tools-version>
         <jstl-version>1.2</jstl-version>
         <taglibs-version>1.1.2</taglibs-version>
-        <!-- <freemarker-version>2.3.23</freemarker-version> -->
+        <freemarker-version>2.3.23</freemarker-version>
         <kaptcha.version>0.0.9</kaptcha.version>
         <spring-data-redis.version>1.6.0.RELEASE</spring-data-redis.version>        
         <jedis.version>2.7.3</jedis.version>
@@ -181,6 +181,11 @@
             <artifactId>commons-configuration</artifactId>
             <version>${commons-configuration-version}</version>
         </dependency>
+		<dependency>
+    	<groupId>commons-net</groupId>
+		    <artifactId>commons-net</artifactId>
+		    <version>3.4</version>
+		</dependency>
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-core</artifactId>
@@ -262,11 +267,11 @@
             <version>${taglibs-version}</version>
         </dependency>
         <!-- Freemarker视图所需jar -->
-        <!-- <dependency>
+        <dependency>
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
             <version>${freemarker-version}</version>
-        </dependency> -->
+        </dependency>
         <!--验证码生成工具-->
         <dependency>
             <groupId>com.github.axet</groupId>
@@ -374,6 +379,16 @@
 		    <groupId>org.springframework.amqp</groupId>
 		    <artifactId>spring-rabbit</artifactId>
 		    <version>1.7.2.RELEASE</version>
+		</dependency>
+		<!-- <dependency>
+			<groupId>org.fusesource</groupId>
+			<artifactId>sigar</artifactId>
+			<version>1.6.4</version>
+		</dependency> -->
+		<dependency>
+		    <groupId>org.hyperic</groupId>
+		    <artifactId>sigar</artifactId>
+		    <version>1.6.5.132</version>
 		</dependency>
     </dependencies>
     <build>

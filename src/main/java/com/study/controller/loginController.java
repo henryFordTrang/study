@@ -18,9 +18,11 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.study.dao.UserMapper;
 import com.study.model.User;
@@ -28,7 +30,10 @@ import com.study.rabbitMQ.MqMessage;
 import com.study.security.UserRealm;
 import com.study.util.ShiroUtils;
 import com.study.util.secutiryUtil;
-
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/admin")
 public class loginController {
@@ -54,7 +59,40 @@ public class loginController {
 //		//ss.convertAndSend(mqMessage);
 //	}
 	
-	@RequestMapping("/login")
+	
+	
+
+
+	    
+	@GetMapping("/html")
+	public String helloFreeMarker(ModelMap model) {
+	    System.err.println("**********html*****************");
+	    //model.addAttribute("name","ITDragon博客");
+	    //model.addObject("name", "wsnm");
+	    model.addAttribute("name", "wsnm");
+	    return "header";
+	}
+	
+	@GetMapping("/jsp")
+	public String jsp(ModelMap model) {
+	    System.err.println("***********jsp****************");
+	    //model.addAttribute("name","ITDragon博客");
+	    //model.addObject("name", "wsnm");
+	    model.addAttribute("name", "wsnm");
+	    return "test";
+	}
+	
+	@GetMapping("/header")
+	public String header(ModelMap model) {
+	    System.err.println("***********jsp****************");
+	    //model.addAttribute("name","ITDragon博客");
+	    //model.addObject("name", "wsnm");
+	    model.addAttribute("name", "wsnm");
+	    return "header2";
+	}
+	
+	
+	@RequestMapping("/login3")
 	@ResponseBody
 	public String login(@RequestBody User user,HttpServletRequest request){
 		Subject subject = ShiroUtils.getSubject();

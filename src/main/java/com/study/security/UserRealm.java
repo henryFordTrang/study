@@ -45,6 +45,7 @@ public class UserRealm extends AuthorizingRealm {
 		
 		String userName = (String) token.getPrincipal();
         String password = new String((char[]) token.getCredentials());
+        log.info(userName+"===="+password);
         User user=usermapper.qryUserByPhone(userName);
       //账号不存在
         if (user == null) {

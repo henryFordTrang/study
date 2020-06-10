@@ -52,9 +52,9 @@
 			<columnOverride column="spzt" javaType="Integer" />
 		</table>
 		-->
-		<table schema="huawei" tableName="user"
+		<table schema="chat" tableName="user"
 			domainObjectName="User">
-			<generatedKey column="uid" sqlStatement="mysql" identity="true" />
+			<generatedKey column="id" sqlStatement="mysql" identity="true" />
 		</table>
 		
 		<!--<table schema="huawei" tableName="brand"
