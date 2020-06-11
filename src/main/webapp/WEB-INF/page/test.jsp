@@ -14,12 +14,12 @@ var vm = new Vue({
 	el:"#vue",
 	data(){
 		return{
-			src:'/study/captcha'
+			src:'/study/sys/captcha'
 		}
 	},
 	methods:{
 		refreshCode(){
-			this.src="/study/captcha?t="+$.now();
+			this.src="/study/sys/captcha?t="+$.now();
 		}
 	},
 	mounted(){

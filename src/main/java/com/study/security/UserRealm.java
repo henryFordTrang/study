@@ -8,6 +8,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -50,12 +51,15 @@ public class UserRealm extends AuthorizingRealm {
       //账号不存在
         if (user == null) {
             throw new UnknownAccountException("账号或密码不正确");
+        }else if(!password.equals(user.getUpassword())){
+        	throw new IncorrectCredentialsException("密码不正确");
         }
         Subject subject = SecurityUtils.getSubject();
         Session session = subject.getSession(true);
         session.setAttribute(Global.CURRENT_USER, user);
         SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user.getPhonenumber(),
         		user.getUpassword(), getName());
+        System.err.println(getName().toString()+info.toString());
 		//SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user, xxx, getName());
 		return info;
 	}

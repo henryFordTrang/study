@@ -52,16 +52,24 @@
             <bean class="com.study.security.logInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
-
+	<bean  class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+                <property name="templateLoaderPath">
+                        <value>/WEB-INF/page/</value>
+                </property>
+        </bean>
+        <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+                <property name="contentType" value="text/html;charset=UTF-8"></property>
+                <property name="suffix" value=".html" />
+        </bean>
     <!-- Velocity视图解析器    默认视图  -->
      <!--是否使用spring对宏定义的支持-->
-   <bean id="velocityViewResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+   <!-- <bean id="velocityViewResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
         <property name="contentType" value="text/html;charset=UTF-8"/>
         <property name="viewNames" value="*.html"/>
         <property name="suffix" value=""/>
         <property name="dateToolAttribute" value="date"/>
         <property name="numberToolAttribute" value="number"/>
-        <!-- <property name="toolboxConfigLocation" value="/WEB-INF/velocity-toolbox.xml"/> -->
+        <property name="toolboxConfigLocation" value="/WEB-INF/velocity-toolbox.xml"/>
        
         <property name="exposeRequestAttributes" value="true"/>
         <property name="requestContextAttribute" value="rc"/>
@@ -77,17 +85,17 @@
                 <prop key="contentType">text/html;charset=UTF-8</prop>
             </props>
         </property>
-    </bean>
+    </bean> -->
 
     <!-- JSP视图解析器  -->
-    <bean id="viewResolverJsp" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <!-- <bean id="viewResolverJsp" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/page/"/>
         <property name="suffix" value=".jsp"/>
        <property name="order" value="3"/>
-    </bean>
+    </bean> -->
 
     <!-- FreeMarker视图解析器  -->
-     <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">  
+     <!-- <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">  
         <property name="templateLoaderPath">  
             <value>/WEB-INF/page/</value>  
         </property>
@@ -105,7 +113,7 @@
         <property name="viewClass" value="org.springframework.web.servlet.view.InternalResourceView"/>
         <property name="contentType" value="text/html;charset=UTF-8"/>
          <property name="order" value="2"/>
-    </bean>
+    </bean> -->
 
     <!-- Kaptcha验证码生成器 -->
     <bean name="producer" class="com.google.code.kaptcha.impl.DefaultKaptcha" scope="singleton">

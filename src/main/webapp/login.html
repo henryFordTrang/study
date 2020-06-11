@@ -1,5 +1,7 @@
 <html>
 <head>
+	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>字典</title>
     <link rel="stylesheet" href="/study/statics/css/login.css">   
 </head>
@@ -71,7 +73,7 @@
 			      <i-col span="12">
 			        <card class="login-card">
 			          <div class="card-header">
-			            <h1 class="title">随便玩*玩</h1>
+			            <h1 class="title">福建野鸡大学</h1>
 			          </div>
 			          <div class="card-main">
 			            <div class="form-group">
@@ -154,7 +156,7 @@ var vm = new Vue({
               dataType: 'json',
               success : function (result) {
                 if (result.code == 0) {//登录成功
-                  parent.location.href = 'jsp';
+                  window.location.href = '/study/index.html';
                 } else {
                   vm.refreshCode();
                   iview.Message.error(result.msg);

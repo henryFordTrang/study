@@ -26,7 +26,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
+import com.study.model.User;
 import com.study.security.logInterceptor;
+import com.study.util.R;
 import com.study.util.ShiroUtils;
 
 /**
@@ -73,7 +75,8 @@ public class SysLoginController {
     }
     @RequestMapping("/login")
 	@ResponseBody
-	public String shiroLogin(String username, String password, String captcha){
+	public R shiroLogin(String username, String password, String captcha){
+    	try {					
 		log.info("---user---"+username+"--password--"+password+"---captcha---"+captcha);
 		String orgcaptcha=ShiroUtils.getSessionAttribute("KAPTCHA_SESSION_KEY").toString();
 		Subject subject = ShiroUtils.getSubject();
@@ -81,7 +84,12 @@ public class SysLoginController {
         password = new Sha256Hash(password).toHex();
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         subject.login(token);
-		return null;
+        //User user = ShiroUtils.getUserEntity();
+		return R.ok();
+    	} catch (Exception e) {
+			// TODO: handle exception
+    		return R.error();
+		}
 	}
 
 }
