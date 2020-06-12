@@ -7,10 +7,12 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -115,23 +117,23 @@ public class loginController {
        System.out.println(request.getSession().toString()+"----------stringify---request----------");
 		return null;		
 	}
+	
 	@RequestMapping("/login2")
 	@ResponseBody
 	public String login2(@RequestBody User user){
-		Subject subject = ShiroUtils.getSubject();
-		log.info(user);
-		User user1=usermapper.qryUserByPhone(user.getPhonenumber());
-        //sha256加密
-		String password=new Md5Hash(user.getUpassword()).toHex();
-       //String password = new Sha256Hash(user.getUpassword()).toHex();	
-       UsernamePasswordToken token = new UsernamePasswordToken(user.getPhonenumber(), password);
-       try {
-    	   subject.login(token);
-       } catch (UnknownAccountException e) {
-		// TODO: handle exception
-       }
+		System.err.println(user.getPhonenumber()+"---"+user.getUpassword());
+//       try {
+//    	   	Subject subject = ShiroUtils.getSubject();
+//	   		log.info(user);
+//	   		User user1=usermapper.qryUserByPhone(user.getPhonenumber());
+//	   		String password=new Md5Hash(user.getUpassword()).toHex();
+//	          UsernamePasswordToken token = new UsernamePasswordToken(user.getPhonenumber(), password);
+//    	   subject.login(token);
+//       } catch (UnknownAccountException e) {
+//		// TODO: handle exception
+//       }
        
-		return null;		
+		return "bitch";		
 	}
 	
 	@RequestMapping("/login1")

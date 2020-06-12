@@ -52,11 +52,10 @@
             <value>
                 /statics/**=anon
             	/sys/**=anon
+            	/moduleTest/**=anon
+            	/admin/**=authc
                 /index.html = authc
                 /login.html=anon
-                /checkLogin.json = anon  
-                /loginsuccess.html = anon  
-                /logout.json = anon  
                 /** = authc  
             </value>
         </property>

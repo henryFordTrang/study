@@ -44,8 +44,8 @@
 					<dt></dt>
 					<dd id="btn-dd">
 						<span class="new-btn-login-sp">
-							<button class="new-btn-login" type="submit"
-								style="text-align: center;">付 款</button>
+							<button class="new-btn-login" type="button"
+								style="text-align: center;" id="pay">付 款</button>
 						</span> <span class="note-help">如果您点击“付款”按钮，即表示您同意该次的执行操作。</span>
 					</dd>
 				</dl>
@@ -66,8 +66,8 @@
     	  $.ajax({
         	  url:'/study/admin/jsp',
               type: "GET",
-    		    contentType: "application/json",
-        	  onsuccess:function(data){
+    		  contentType: "application/json",
+        	  success:function(data){
         		  console.log(data);
         	  }
           })
@@ -76,8 +76,25 @@
     	  $.ajax({
         	  url:'/study/admin/html',
               type: "GET",
-    		    contentType: "application/json",
-        	  onsuccess:function(data){
+    		  contentType: "application/json",
+        	  success:function(data){
+        		  console.log(data);
+        	  }
+          })
+      })
+      $('#pay').click(function(){
+    	  var param = Object.assign({
+    		  uid:1,
+    		  uname:'sniper',
+    		  phonenumber:'13509309141'
+    	  });
+    	  $.ajax({
+        	  url:'/study/admin/login2',
+              type: "POST",
+              data:JSON.stringify(param),
+              contentType:'application/json',
+    		  dataType: 'json',
+    		  success:function(data){
         		  console.log(data);
         	  }
           })
