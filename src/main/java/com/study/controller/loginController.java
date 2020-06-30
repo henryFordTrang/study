@@ -1,44 +1,43 @@
 package com.study.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.AuthenticationInfo;
+import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.crypto.hash.Md5Hash;
-import org.apache.shiro.crypto.hash.Sha256Hash;
+import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.study.dao.UserMapper;
 import com.study.model.User;
-import com.study.rabbitMQ.MqMessage;
-import com.study.security.UserRealm;
+import com.study.security.IgnoreAuth;
+import com.study.util.Global;
 import com.study.util.ShiroUtils;
 import com.study.util.secutiryUtil;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
+//import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.SecurityUtils;
+
 @Controller
 @RequestMapping("/admin")
-public class loginController {
+public class loginController extends baseController {
 	Log log=LogFactory.getLog(loginController.class);
 	secutiryUtil securityutil=new secutiryUtil();
 	@Autowired UserMapper usermapper;
@@ -118,10 +117,23 @@ public class loginController {
 		return null;		
 	}
 	
+	@IgnoreAuth
 	@RequestMapping("/login2")
 	@ResponseBody
-	public String login2(@RequestBody User user){
-		System.err.println(user.getPhonenumber()+"---"+user.getUpassword());
+	public String login2(@RequestBody String msg){
+		//User user
+		//System.err.println(Global.CURRENT_USER);
+		Object obj = SecurityUtils.getSubject().getPrincipal();
+		//System.out.println(obj.toString());
+		Subject subject = SecurityUtils.getSubject();
+		Session session = subject.getSession(true);
+		User usershiro = (User) session.getAttribute(Global.CURRENT_USER);
+		User xxuser = getUser();
+		System.out.println(xxuser.toString()+"=====**********************");
+        Map<String,Object>xxx = new org.apache.commons.beanutils.BeanMap(session.getAttribute(Global.CURRENT_USER));
+        //getUser();
+        //User usershiro = session.getAttribute(Global.CURRENT_USER)；
+		//System.out.println(usershiro.getUname()+":"+Global.CURRENT_USER+"\t\n"+session.getAttribute(Global.CURRENT_USER)+"\t\n"+xxx+"============================");
 //       try {
 //    	   	Subject subject = ShiroUtils.getSubject();
 //	   		log.info(user);
@@ -138,7 +150,8 @@ public class loginController {
 	
 	@RequestMapping("/login1")
 	@ResponseBody
-	public String login1(@RequestBody User user){
+	public String login1(@RequestBody String msg){
+		System.err.println(88888888+msg);
 //		test();
 //		return "xxxx";
 //		
@@ -193,4 +206,5 @@ public class loginController {
 //	    Student student1 = (Student) redisTemplate.opsForValue().get("student_1");
 //	    student1.service();
 	}
+
 }
